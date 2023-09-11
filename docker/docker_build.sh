@@ -69,7 +69,7 @@ function execute
          VAI_BASE="ubuntu:20.04"
      fi
      if [[ "$DOCKER_TYPE" == 'gpu' ]];then
-         VAI_BASE="cat-docker.artifacts.cat.com/plat_hwaccel/nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04"
+         VAI_BASE="cat-docker.artifacts.cat.com/nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04"
      fi
      if [[ "$DOCKER_TYPE" == 'rocm' ]]; then
 	if [[ $TARGET_FRAMEWORK =~ .*"pytorch"* ]];then
