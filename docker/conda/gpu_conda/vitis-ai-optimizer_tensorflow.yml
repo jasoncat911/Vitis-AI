@@ -2,7 +2,7 @@ name: vitis-ai-optimizer_tensorflow
 
 channels:
   - conda-forge
-  - anaconda
+  - prometeia
 
 dependencies:
   - python=3.6

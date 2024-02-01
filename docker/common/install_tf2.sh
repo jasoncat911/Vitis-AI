@@ -35,13 +35,13 @@ if [[ ${DOCKER_TYPE} == 'cpu' ]]; then
     && mkdir -p $VAI_ROOT/conda/pkgs \
     && python3 -m pip install --upgrade pip wheel setuptools \
     && conda config --env --append channels ${VAI_WEGO_CONDA_CHANNEL}/wegotf2 \
-    && conda config --remove channels defaults || true \
+    && conda config --env --remove channels defaults || true \
     && cat ~/.condarc \
     && mamba env create -f /scratch/${DOCKER_TYPE}_conda/vitis-ai-tensorflow2.yml \
     && conda activate vitis-ai-tensorflow2 \
     && mamba install --no-update-deps  vai_q_tensorflow2 pydot pyyaml jupyter ipywidgets \
             dill progressbar2 pytest scikit-learn pandas matplotlib \
-            pillow -c ${VAI_WEGO_CONDA_CHANNEL}/wegotf2 -c conda-forge -c defaults \
+            pillow -c ${VAI_WEGO_CONDA_CHANNEL}/wegotf2 -c conda-forge --override-channels \
         && pip install -r /scratch/pip_requirements.txt \
         && pip install pycocotools scikit-image tqdm easydict \
         && pip uninstall -y h5py \
@@ -62,12 +62,12 @@ elif [[ ${DOCKER_TYPE} == 'rocm' ]]; then
     && sudo python3 -m pip install --upgrade pip wheel setuptools \
     && conda config --env --remove-key channels \
     && conda config --env --append channels ${conda_channel}  \
-    && conda config --remove channels defaults || true \
+    && conda config --env --remove channels defaults || true \
     && mamba env create -f /scratch/${DOCKER_TYPE}_conda/vitis-ai-tensorflow2.yml \
     && conda activate vitis-ai-tensorflow2 \
     && mamba install --no-update-deps -y vai_q_tensorflow2${arch_type} pydot pyyaml jupyter ipywidgets \
             dill progressbar2 pytest scikit-learn pandas matplotlib \
-            pillow -c ${conda_channel} -c conda-forge -c defaults \
+            pillow -c ${conda_channel} -c conda-forge --override-channels\
         && pip install -r /scratch/pip_requirements.txt \
         && pip install pycocotools scikit-image tqdm easydict \
         && pip install --ignore-installed ${tensorflow_ver} \
@@ -88,12 +88,12 @@ else
     && sudo python3 -m pip install --upgrade pip wheel setuptools \
     && conda config --env --remove-key channels \
     && conda config --env --append channels ${conda_channel}  \
-    && conda config --remove channels defaults || true \
+    && conda config --env --remove channels defaults || true \
     && mamba env create -f /scratch/${DOCKER_TYPE}_conda/vitis-ai-tensorflow2.yml \
     && conda activate vitis-ai-tensorflow2 \
     && mamba install --no-update-deps -y vai_q_tensorflow2${arch_type} pydot pyyaml jupyter ipywidgets \
-            dill progressbar2 pytest scikit-learn pandas matplotlib \
-            pillow -c ${conda_channel} -c conda-forge -c defaults \
+            dill progressbar2 pytest scikit-learn matplotlib \
+            pillow -c ${conda_channel} -c conda-forge \
         && pip install -r /scratch/pip_requirements.txt \
         && pip install pycocotools scikit-image tqdm easydict \
         && pip install --ignore-installed ${tensorflow_ver} \

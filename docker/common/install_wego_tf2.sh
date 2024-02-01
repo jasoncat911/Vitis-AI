@@ -14,12 +14,12 @@ fi;
     && mamba install -c conda-forge conda-build \
     && python3 -m pip install --upgrade pip wheel setuptools \
     && conda config --env --append channels ${VAI_WEGO_CONDA_CHANNEL}/wegotf2 \
-    && conda config --remove channels defaults || true \
+    && conda config --env --remove channels defaults || true \
     && cat ~/.condarc \
     && mamba env create -f /scratch/${DOCKER_TYPE}_conda/vitis-ai-wego-tf2.yml \
     && conda config --env --remove-key channels \
     && conda activate vitis-ai-wego-tf2 \
-    && mamba install --no-update-deps -y vai_q_tensorflow2  -c  ${VAI_CONDA_CHANNEL} -c conda-forge -c anaconda \
+    && mamba install --no-update-deps -y vai_q_tensorflow2  -c  ${VAI_CONDA_CHANNEL} -c conda-forge -c anaconda --override-channels \
     && conda clean -y --force-pkgs-dirs \
     && rm -fr ~/.cache  \
     && sudo rm -fr /scratch/* \

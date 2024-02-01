@@ -12,7 +12,7 @@ sudo chmod -R 777 /scratch/
     && mkdir -p $VAI_ROOT/conda/pkgs \
     && python3 -m pip install --upgrade pip wheel setuptools \
     && conda config --env --append channels ${VAI_CONDA_CHANNEL} \
-    && conda config --remove channels defaults  || true \
+    && conda config --env --remove channels defaults  || true \
     && cat ~/.condarc \
     && mamba env create -f /scratch/${DOCKER_TYPE}_conda/vitis-ai-wego-torch.yml \
     && conda clean -y --force-pkgs-dirs \

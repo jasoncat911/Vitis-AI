@@ -17,7 +17,7 @@ if [[ ${DOCKER_TYPE} == "cpu"  ]]; then
     && mkdir -p  $VAI_ROOT/conda/pkgs \
     && python3 -m pip install --upgrade pip wheel setuptools \
     && conda config --env --append channels ${VAI_WEGO_CONDA_CHANNEL}/wegotf1 \
-    && conda config --remove channels defaults || true  \
+    && conda config --env --remove channels defaults || true  \
     && cat ~/.condarc \
     && mamba create  -n  vitis-ai-tensorflow  vai_q_tensorflow  tensorflow-onnx -c  ${VAI_CONDA_CHANNEL} -c conda-forge -c anaconda \
     && conda activate vitis-ai-tensorflow \
@@ -39,7 +39,7 @@ else
     && python3 -m pip install --upgrade pip wheel setuptools \
     && conda config --env --remove-key channels \
     && conda config --env --add channels ${VAI_WEGO_CONDA_CHANNEL}/wegotf1 \
-    && conda config --remove channels defaults  || true \
+    && conda config --env --remove channels defaults  || true \
     && cat ~/.condarc \
     && mamba env create -v -f /scratch/${DOCKER_TYPE}_conda/vitis-ai-tensorflow.yml \
     && conda activate vitis-ai-tensorflow \

@@ -25,7 +25,7 @@ if [[ ${DOCKER_TYPE} == 'rocm' ]]; then
     && sudo python3 -m pip install --upgrade pip wheel setuptools requests \
     && sudo conda config --env --remove-key channels || true \
     && sudo conda config --env --append channels ${VAI_CONDA_CHANNEL} \
-    && sudo conda config --remove channels defaults || true \
+    && sudo conda config --env --remove channels defaults || true \
     && ${command_opt} \
     && sudo conda clean -y --force-pkgs-dirs \
     && sudo rm -fr ~/.cache \
